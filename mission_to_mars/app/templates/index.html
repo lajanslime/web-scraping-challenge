@@ -1,1 +1,59 @@
 <!-- Create a landing page for your app, using Jinja to insert data from your database -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+        </div>
+        
+        <div class = "row"> 
+            <div class="col col-12 col-md-7 divbody">
+                <h2>Latest Mars News</h2>
+                <h4>{{ mars.mars_news['news_title'] }}</h4>
+                <p>{{ mars.mars_news['paragraph_text'] }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+              <h2>Featured Mars Image</h2>
+              <img class="img-responsive" src="{{ mars.featured_image }}" alt="Featured Mars Image">
+            </div>
+            <div class="col-md-4">
+              <h4>Mars Facts</h4>
+              <table class="table table-bordered table-striped">
+                {{mars.mars_facts|safe}}
+              </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+              <h2><b>Mars Hemispheres</b></h2>
+            </div>
+  
+            {% for hemisphere in mars.hemispheres %}
+              <div class="col-md-6 text-center">
+                <h5><b>{{hemisphere.title}}</b></h5>
+                <a href="{{hemisphere.img_url}}"><img src="{{hemisphere.img_url}}" width="75%"></a>
+              </div>
+            {% endfor %}
+  
+        </div>
+    </div>
+</body>
+
+</html>
+
+
